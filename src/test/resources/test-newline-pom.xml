@@ -1,0 +1,40 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.github.bomas</groupId>
+	<artifactId>test</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	<name>Test ConcatMojo</name>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.10</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>concat-maven-plugin</artifactId>
+				<configuration>
+					<appendNewline>true</appendNewline>
+					<outputFile>target/concatfile.output</outputFile>
+					<concatFiles>
+						<param>src/test/resources/testfiles/file_1.input</param>
+						<param>src/test/resources/testfiles/file_2.input</param>
+						<param>src/test/resources/testfiles/file_3.input</param>
+					</concatFiles>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
+
+
+
+</project>

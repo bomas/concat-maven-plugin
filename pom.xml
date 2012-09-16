@@ -8,19 +8,84 @@
 	
 	<name>concat-maven-plugin Maven Mojo</name>
 	<url>https://github.com/bomas/concat-maven-plugin</url>
+	<scm>
+		<url>https://github.com/bomas/concat-maven-plugin.git</url>
+	</scm>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	
+	
+	<build>
+    	<plugins>
+      		<plugin>
+        		<groupId>org.apache.maven.plugins</groupId>
+        		<artifactId>maven-plugin-plugin</artifactId>
+        		<version>3.1</version>
+        		<configuration>
+          			<skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
+        		</configuration>
+        		<executions>
+          			<execution>
+          				<phase>generate-resources</phase>
+            			<id>mojo-descriptor</id>
+            			<goals>
+              				<goal>descriptor</goal>
+            			</goals>
+          			</execution>
+          			<execution>
+          				<phase>generate-resources</phase>
+            			<id>help-goal</id>
+            			<goals>
+              				<goal>helpmojo</goal>
+            			</goals>
+          			</execution>
+        		</executions>
+      		</plugin>
+    	</plugins>
+  	</build>
+	
+	
+	
 	
 	<dependencies>
+		
 		<dependency>
 			<groupId>org.apache.maven</groupId>
 			<artifactId>maven-plugin-api</artifactId>
+			<version>3.0.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.plugin-tools</groupId>
+			<artifactId>maven-plugin-annotations</artifactId>
+			<version>3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.plexus</groupId>
+			<artifactId>plexus-utils</artifactId>
+			<version>3.0.4</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.maven.plugin-testing</groupId>
+			<artifactId>maven-plugin-testing-harness</artifactId>
 			<version>2.0</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
+			<version>4.10</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
-	</project>
+	
+</project>

@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.github.bomas</groupId>
+	<groupId>com.flawless101</groupId>
 	<artifactId>test</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
@@ -12,7 +12,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.10</version>
+			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
@@ -20,6 +20,7 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>com.flawless101</groupId>
 				<artifactId>concat-maven-plugin</artifactId>
 				<configuration>
 					<outputFile>target/concatfile.output</outputFile>

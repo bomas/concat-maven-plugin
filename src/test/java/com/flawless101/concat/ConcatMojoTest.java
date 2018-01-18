@@ -1,4 +1,4 @@
-package com.github.bomas.concat;
+package com.flawless101.concat;
 
 import java.io.File;
 
@@ -25,40 +25,44 @@ public class ConcatMojoTest extends AbstractMojoTestCase {
 		super.tearDown();
 	}
 
-	
 	@Test
 	public void testConcat() throws Exception {
-		
 		execute("src/test/resources/test-pom.xml", "concat", "target/concatfile.output", "file1file2file3");
 	}
-	
+
+	@Test
+	public void testConcatDeleteTargetFile() throws Exception {
+		FileUtils.copyFile(new File("src/test/resources/testfiles/file_1.input"), new File("target/concatfile.output"));
+		execute("src/test/resources/test-delete-target-file-pom.xml", "concat", "target/concatfile.output",
+				"file1file2file3");
+	}
+
 	@Test
 	public void testConcatNewline() throws Exception {
 		String expectedResult = "file1" + NEWLINE + "file2" + NEWLINE + "file3" + NEWLINE;
 		execute("src/test/resources/test-newline-pom.xml", "concat", "target/concatfile.output", expectedResult);
-		
+
 	}
-	
+
 	@Test
-	public void testMissingOutputParameter() throws Exception{
-		try{
+	public void testMissingOutputParameter() throws Exception {
+		try {
 			execute("src/test/resources/test-missing-output-pom.xml", "concat", "bla", "nothing");
-		}catch(Exception e){
+		} catch (Exception e) {
 			assertEquals(MojoExecutionException.class, e.getClass());
 		}
 	}
-	
+
 	@Test
-	public void testMissingConcatParameter() throws Exception{
-		try{
+	public void testMissingConcatParameter() throws Exception {
+		try {
 			execute("src/test/resources/test-missing-concat-pom.xml", "concat", "bla", "nothing");
-		}catch(Exception e){
+		} catch (Exception e) {
 			assertEquals(MojoExecutionException.class, e.getClass());
 		}
 	}
-	
-	
-	private void execute(String pomPath,String mojo, String resultFile, String expectedResult) throws Exception {
+
+	private void execute(String pomPath, String mojo, String resultFile, String expectedResult) throws Exception {
 		File pom = getTestFile(pomPath);
 		assertNotNull(pom);
 		assertTrue(pom.exists());
@@ -66,7 +70,7 @@ public class ConcatMojoTest extends AbstractMojoTestCase {
 		ConcatMojo concatMojo = (ConcatMojo) lookupMojo(mojo, pom);
 		assertNotNull(concatMojo);
 		concatMojo.execute();
-		
+
 		File outputFile = getTestFile(resultFile);
 		assertNotNull(outputFile);
 		assertTrue(outputFile.exists());

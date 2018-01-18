@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.flawless101</groupId>
 	<artifactId>test</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>Test ConcatMojo</name>
 
@@ -12,7 +12,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.10</version>
+			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
@@ -20,9 +20,10 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>com.flawless101</groupId>
 				<artifactId>concat-maven-plugin</artifactId>
 				<configuration>
-					<appendNewline>true</appendNewline>
+					<deleteTargetFile>true</deleteTargetFile>
 					<outputFile>target/concatfile.output</outputFile>
 					<concatFiles>
 						<param>src/test/resources/testfiles/file_1.input</param>

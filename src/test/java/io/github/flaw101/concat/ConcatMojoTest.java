@@ -32,8 +32,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import io.github.flaw101.concat.ConcatMojo;
-
 public class ConcatMojoTest extends AbstractMojoTestCase {
 	private static String NEWLINE = System.getProperty("line.separator");
 

@@ -12,7 +12,7 @@ A basic example, which will concat the `.input` files to the `concatfile.output`
 
 ```xml
 <plugin>
-    <groupId>com.flawless101</groupId>
+    <groupId>io.github.flaw101</groupId>
     <artifactId>concat-maven-plugin</artifactId>
     <configuration>
         <outputFile>target/concatfile.output</outputFile>

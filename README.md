@@ -4,11 +4,13 @@ Maven Plugin to allow concatenation of files.
 
 Forked from [Bomas Contcat Maven Plugin](https://github.com/bomas/concat-maven-plugin "https://github.com/bomas/concat-maven-plugin").
 
-This plugin is created against `3.2.5`, the last supported java 1.6 maven release.
+This plugin is compile to maven `3.2.5`, the last supported java 1.6 maven release.
+
+The plugin can concat any file the plugin has access to, just provide the correct path.
 
 ## Usage ##
 
-A basic example, which will concat the `.input` files to the `concatfile.output`
+A basic example, which will concat the `.input` files to the `concatfile.output`.
 
 ```xml
 <plugin>

@@ -40,6 +40,10 @@ import org.apache.maven.plugin.MojoExecutionException;
  * 
  * 		@Mojo( defaultPhase = "process-sources" )
  * @phase process-sources
+ * 
+ * @author Darren Forsythe
+ * @since 1.0
+ * @version 1.0
  */
 public class ConcatMojo extends AbstractMojo {
 

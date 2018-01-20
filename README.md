@@ -8,6 +8,14 @@ This plugin is compile to maven `3.2.5`, the last supported java 1.6 maven relea
 
 The plugin can concat any file the plugin has access to, just provide the correct path.
 
+The plugin is hosted on Maven Central,
+
+<dependency>
+    <groupId>io.github.flaw101</groupId>
+    <artifactId>concat-maven-plugin</artifactId>
+    <version><!-- A Version --> </version>
+</dependency>
+
 ## Usage ##
 
 A basic example, which will concat the `.input` files to the `concatfile.output`.

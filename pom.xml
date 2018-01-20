@@ -9,12 +9,21 @@
 	<name>Concat Maven Plugin</name>
 	<description>Maven plugin that can concatenate several files into one new file.</description>
 	<url>https://github.com/flaw101/concat-maven-plugin</url>
-	<contributors>
-		<contributor>
+	<developers>
+		<developer>
 			<name>Darren Forsythe</name>
 			<email>forsythed90@gmail.com</email>
-		</contributor>
-	</contributors>
+			<id>Flawless101</id>
+			<timezone>0</timezone>
+		</developer>
+	</developers>
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
 	<scm>
 		<url>https://github.com/flawl101/concat-maven-plugin.git</url>
 	</scm>

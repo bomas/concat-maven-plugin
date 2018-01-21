@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.github.flaw101</groupId>
 	<artifactId>test</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>Test ConcatMojo</name>
 
@@ -22,6 +22,7 @@
 			<plugin>
 				<artifactId>concat-maven-plugin</artifactId>
 				<configuration>
+					<deleteTargetFile>true</deleteTargetFile>
 					<outputFile>target/concatfile.output</outputFile>
 					<concatFiles>
 						<param>src/test/resources/testfiles/file_1.input</param>

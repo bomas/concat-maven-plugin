@@ -20,14 +20,14 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>com.flawless101</groupId>
 				<artifactId>concat-maven-plugin</artifactId>
 				<configuration>
 					<outputFile>target/concatfile.output</outputFile>
-					<concatFiles>
-						<param>src/test/resources/testfiles/file_1.input</param>
-						<param>src/test/resources/testfiles/file_2.input</param>
-						<param>src/test/resources/testfiles/file_3.input</param>
-					</concatFiles>
+					<directory>src/test/resources/testfiles/</directory>
+					<concatenationType>
+						DIRECTORY
+					</concatenationType>
 				</configuration>
 			</plugin>
 		</plugins>

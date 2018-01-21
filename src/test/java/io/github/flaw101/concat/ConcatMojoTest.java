@@ -99,6 +99,36 @@ public class ConcatMojoTest extends AbstractMojoTestCase {
 		}
 	}
 
+	@Test
+	public void testDirectoryCompetingArgs() throws Exception {
+		try {
+			execute("src/test/resources/test-pom-directory-competing-args.xml", "concat", "bla", "nothing");
+		} catch (Exception e) {
+			ExceptionUtils.printRootCauseStackTrace(e);
+			assertEquals(MojoExecutionException.class, e.getClass());
+		}
+	}
+
+	@Test
+	public void testDirectoryMissingDirectory() throws Exception {
+		try {
+			execute("src/test/resources/test-pom-directory-missing-directory.xml", "concat", "bla", "nothing");
+		} catch (Exception e) {
+			ExceptionUtils.printRootCauseStackTrace(e);
+			assertEquals(MojoExecutionException.class, e.getClass());
+		}
+	}
+
+	@Test
+	public void testNotADirectory() throws Exception {
+		try {
+			execute("src/test/resources/test-pom-directory-not-a-directory.xml", "concat", "bla", "nothing");
+		} catch (Exception e) {
+			ExceptionUtils.printRootCauseStackTrace(e);
+			assertEquals(MojoExecutionException.class, e.getClass());
+		}
+	}
+
 	private void execute(String pomPath, String mojo, String resultFile, String expectedResult) throws Exception {
 		File pom = getTestFile(pomPath);
 		assertNotNull(pom);

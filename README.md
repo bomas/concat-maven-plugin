@@ -10,11 +10,14 @@ The plugin can concat any file the plugin has access to, just provide the correc
 
 The plugin is hosted on Maven Central,
 
+
+```xml
 <dependency>
     <groupId>io.github.flaw101</groupId>
     <artifactId>concat-maven-plugin</artifactId>
     <version><!-- A Version --> </version>
 </dependency>
+```
 
 ## File List Usage ##
 

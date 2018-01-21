@@ -4,12 +4,7 @@ Maven Plugin to allow concatenation of files.
 
 Forked from [Bomas Contcat Maven Plugin](https://github.com/bomas/concat-maven-plugin "https://github.com/bomas/concat-maven-plugin").
 
-This plugin is compile to maven `3.2.5`, the last supported java 1.6 maven release.
-
-The plugin can concat any file the plugin has access to, just provide the correct path.
-
-The plugin is hosted on Maven Central,
-
+This plugin is compiled against maven `3.2.5`, the last supported java 1.6 maven release, hosted on Maven Central.
 
 ```xml
 <dependency>
@@ -18,6 +13,23 @@ The plugin is hosted on Maven Central,
     <version><!-- A Version --> </version>
 </dependency>
 ```
+
+## Concatenation Types ##
+
+Multiple methods of concatenating can be supported, the current implementions are,
+
+* `FILE_LIST`
+  * Default setting, expects a list of `concatFiles`.
+* `DIRECTORY`
+  * Given a specified `directory` all files will be concatenated to the output ordered by file name.
+
+### Param Validation ###
+
+Validations are in place to check only the specified parameters required by the Concatentation Type, and are usable.
+
+e.g. `directory` and `concatFiles` params are mutually exclusive and should not be set at the same time.
+
+e.g. All files when using `FILE_LIST` must exist.
 
 ## File List Usage ##
 
@@ -63,7 +75,7 @@ Will concat all files in the directory to the output file.
 * `deleteTargetFile`
   * Defaults to false, if they target file should be deleted before concatenation.
 * `concatenationType`
-  * For selecting different types of concatentation implements. Defaults to requiring a list of files as specified in the basic example.
+  * For selecting different types of concatentation implementations. Defaults to requiring a list of files as specified in the basic example.
 * `directory`
   * When using `ConcatenationType.DIRECTORY` specify the directory from which to get all files. Natural ordering of the file name is used to sort the files.
 

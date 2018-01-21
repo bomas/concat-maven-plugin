@@ -26,9 +26,8 @@ package io.github.flaw101.concat;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
-
-import edu.emory.mathcs.backport.java.util.Collections;
 
 /**
  * Paramerters required for building the output file and validation.

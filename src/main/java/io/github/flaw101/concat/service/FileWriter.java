@@ -25,6 +25,7 @@ package io.github.flaw101.concat.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
 
 import org.apache.commons.io.FileUtils;
 
@@ -39,6 +40,8 @@ import io.github.flaw101.concat.ConcatParams;
  */
 public class FileWriter {
 
+	private static final Charset CHARSET_UTF_8 = Charset.forName("UTF-8");
+
 	public void write(ConcatParams params) {
 		File outputFile = params.getOutputFile();
 		if (params.isDeleteTargetFile()) {
@@ -46,10 +49,11 @@ public class FileWriter {
 		}
 		try {
 			for (File inputFile : params.getFiles()) {
-				String input = FileUtils.readFileToString(inputFile);
-				FileUtils.writeStringToFile(params.getOutputFile(), input, true);
+				String input = FileUtils.readFileToString(inputFile, CHARSET_UTF_8);
+				FileUtils.writeStringToFile(params.getOutputFile(), input, CHARSET_UTF_8, true);
 				if (params.isAppendNewline()) {
-					FileUtils.writeStringToFile(outputFile, System.getProperty("line.separator"), true);
+					FileUtils.writeStringToFile(outputFile, System.getProperty("line.separator"),
+							CHARSET_UTF_8, true);
 
 				}
 			}

@@ -24,6 +24,7 @@
 package io.github.flaw101.concat;
 
 import java.io.File;
+import java.nio.charset.Charset;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -110,7 +111,7 @@ public class ConcatMojoTest extends AbstractMojoTestCase {
 		File outputFile = getTestFile(resultFile);
 		assertNotNull(outputFile);
 		assertTrue(outputFile.exists());
-		String output = FileUtils.readFileToString(outputFile);
+		String output = FileUtils.readFileToString(outputFile, Charset.forName("UTF-8"));
 		assertEquals(expectedResult, output);
 	}
 

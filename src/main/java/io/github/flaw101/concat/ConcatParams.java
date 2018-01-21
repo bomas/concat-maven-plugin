@@ -33,7 +33,7 @@ import java.util.List;
  * Paramerters required for building the output file and validation.
  * 
  * @author Darren Forsythe
- * @Since 1.1.0
+ * @since 1.1.0
  *
  */
 public class ConcatParams {

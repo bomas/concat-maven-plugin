@@ -24,12 +24,14 @@
 package io.github.flaw101.concat;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
+
+import io.github.flaw101.concat.service.FileWriterService;
+import io.github.flaw101.concat.validate.ValidationFailedException;
+import io.github.flaw101.concat.validate.ValidatorService;
 
 /**
  * Goal which concatenates several files and creates a new file as specified.
@@ -42,10 +44,17 @@ import org.apache.maven.plugin.MojoExecutionException;
  * @phase process-sources
  * 
  * @author Darren Forsythe
- * @since 1.0
- * @version 1.0
+ * @since 1.0.0
+ * @version 1.0.0
  */
 public class ConcatMojo extends AbstractMojo {
+
+	/**
+	 * Type of concatenation to perform
+	 * 
+	 * @parameter
+	 */
+	private ConcantenationType concatenationType = ConcantenationType.FILE_LIST;
 
 	/**
 	 * The resulting file
@@ -56,12 +65,19 @@ public class ConcatMojo extends AbstractMojo {
 	private File outputFile;
 
 	/**
-	 * Files to concatenate
+	 * Files to concatenate if using {@link ConcantenationType#FILE_LIST}.
 	 * 
 	 * @parameter
-	 * @required
 	 */
 	private List<File> concatFiles;
+
+	/**
+	 * If using the {@link ConcantenationType#DIRECTORY} provide a directory of
+	 * which all files contained within it will be concatenated in natural ordering.
+	 * 
+	 * @parameter
+	 */
+	private String directory;
 
 	/**
 	 * Append newline after each concatenation
@@ -77,50 +93,30 @@ public class ConcatMojo extends AbstractMojo {
 	 */
 	private boolean deleteTargetFile = false;
 
+	private ValidatorService validatorService = new ValidatorService();
+	private FileWriterService fileWriterService = new FileWriterService();
+
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see org.apache.maven.plugin.AbstractMojo#execute()
 	 */
 	public void execute() throws MojoExecutionException {
-		validate();
-		if (deleteTargetFile) {
-			FileUtils.deleteQuietly(outputFile);
-		}
-		concatFiles();
-	}
-
-	private void concatFiles() throws MojoExecutionException {
+		ConcatParams params = new ConcatParams(directory, concatFiles, outputFile, deleteTargetFile, appendNewline,
+				concatenationType);
 		try {
-			getLog().debug("Going to concatenate files to destination file: " + outputFile.getAbsolutePath());
-			for (File inputFile : concatFiles) {
-				getLog().debug("Concatenating file: " + inputFile.getAbsolutePath());
-				String input = FileUtils.readFileToString(inputFile);
-				FileUtils.writeStringToFile(outputFile, input, true);
-				if (appendNewline) {
-					FileUtils.writeStringToFile(outputFile, System.getProperty("line.separator"), true);
-				}
+			validatorService.validate(params);
+		} catch (ValidationFailedException e) {
+			getLog().error(e);
+			throw new MojoExecutionException("Validation Failed - Please check params", e);
+		}
 
-			}
-		} catch (IOException e) {
-			throw new MojoExecutionException("Failed to concatenate", e);
+		try {
+			fileWriterService.writeToOutputfile(params);
+		} catch (Exception e) {
+			getLog().error(e);
+			throw new MojoExecutionException("Could not write to file.", e);
 		}
 	}
 
-	private void validate() throws MojoExecutionException {
-		if (outputFile == null) {
-			throw new MojoExecutionException("Please specify a correct outPutFile");
-		}
-
-		if (concatFiles == null || concatFiles.isEmpty()) {
-			throw new MojoExecutionException("Please specify the file(s) to concatenate");
-		} else {
-			for (File file : concatFiles) {
-				if (!file.exists()) {
-					throw new MojoExecutionException(file.getAbsolutePath() + " does not exists.");
-				}
-			}
-
-		}
-	}
 }

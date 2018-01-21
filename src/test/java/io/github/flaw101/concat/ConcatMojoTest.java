@@ -28,6 +28,7 @@ import java.io.File;
 import org.apache.commons.io.FileUtils;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.testing.AbstractMojoTestCase;
+import org.codehaus.plexus.util.ExceptionUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -51,6 +52,11 @@ public class ConcatMojoTest extends AbstractMojoTestCase {
 	@Test
 	public void testConcat() throws Exception {
 		execute("src/test/resources/test-pom.xml", "concat", "target/concatfile.output", "file1file2file3");
+	}
+
+	@Test
+	public void testConcat_Directory() throws Exception {
+		execute("src/test/resources/test-pom-directory.xml", "concat", "target/concatfile.output", "file1file2file3");
 	}
 
 	@Test
@@ -87,6 +93,7 @@ public class ConcatMojoTest extends AbstractMojoTestCase {
 		try {
 			execute("src/test/resources/test-missing-concat-pom.xml", "concat", "bla", "nothing");
 		} catch (Exception e) {
+			ExceptionUtils.printRootCauseStackTrace(e);
 			assertEquals(MojoExecutionException.class, e.getClass());
 		}
 	}

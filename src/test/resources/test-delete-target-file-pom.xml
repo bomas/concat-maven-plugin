@@ -20,7 +20,6 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>com.flawless101</groupId>
 				<artifactId>concat-maven-plugin</artifactId>
 				<configuration>
 					<deleteTargetFile>true</deleteTargetFile>
